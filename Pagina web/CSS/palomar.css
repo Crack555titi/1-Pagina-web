@@ -1,0 +1,94 @@
+.palomar {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    gap: 24px;
+}
+
+.palomar h2 {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+.palomar-intro {
+    text-align: center;
+    color: #e5e5e5;
+    line-height: 1.8;
+    max-width: 760px;
+    margin: 0 auto 24px;
+}
+
+.horarios-turnos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.turno-card {
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.turno-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 175, 55, 0.35);
+}
+
+.turno-card h3 {
+    color: #f5f5f7;
+    margin-bottom: 12px;
+}
+
+.horario {
+    color: #d4af37;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.detalle {
+    color: #e0e0e0;
+    line-height: 1.7;
+}
+
+.nota-horarios {
+    text-align: center;
+    color: #f0f0f0;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.titulo {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    margin-bottom: 40px; 
+    margin-top: 10px;
+}
+
+.items {
+    display: flex; 
+    justify-content: center;
+    gap: 200px;
+    margin-bottom: 30px; 
+}
+
+@media (max-width: 760px) {
+    .items {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .horarios-turnos {
+        grid-template-columns: 1fr;
+    }
+}
+
