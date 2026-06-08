@@ -20,7 +20,8 @@
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-header {
+header 
+{
     background: linear-gradient(180deg, #0B0B0B 0%, #111111 100%);
     padding: 48px 20px 32px;
     border-bottom: 2px solid rgba(212, 175, 55, 0.3);
@@ -29,12 +30,14 @@ header {
     top: 0;
     z-index: 100;
 }
-nav {
+nav 
+{
     display: flex;
     justify-content: center;
 }
 
-.items {
+.items 
+{
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -48,11 +51,13 @@ nav {
     backdrop-filter: blur(10px);
 }
 
-.items li {
+.items li 
+{
     list-style: none;
 }
 
-.items a {
+.items a 
+{
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -65,7 +70,8 @@ nav {
     position: relative;
 }
 
-.items a::before {
+.items a::before 
+{
     content: '';
     position: absolute;
     bottom: 0;
@@ -76,7 +82,8 @@ nav {
     transition: width 0.3s ease, left 0.3s ease;
 }
 
-.items a:hover::before {
+.items a:hover::before
+{
     width: 80%;
     left: 10%;
 }

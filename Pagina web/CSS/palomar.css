@@ -22,7 +22,8 @@
     margin: 0 auto 24px;
 }
 
-.horarios-turnos {
+.horarios-turnos 
+{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 18px;
