@@ -1,21 +1,9 @@
-.titulo
-{
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    margin-bottom: 40px; 
-    margin-top: 10px;
-    color: #d4af37;
-}
-
-.items
-{
-    display: flex; 
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
+/* deportes.css
+   .titulo: encabezado de la página de deportes en pages/deportes.html
+   .items: menú de navegación de pages/deportes.html
+   .sedesdep: contenedor de enlaces a las sedes Palomar, Ramos y Capital
+   .sedesdep a: botones de navegación a sedes en pages/deportes.html
+*/
 
 main {
     display: flex;
@@ -30,17 +18,16 @@ main > ul {
     justify-content: center;
 }
 
-.sedesdep
-{
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0;
-  margin-top: 50px;
-  width: 100%;
+.sedesdep {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    margin-top: 50px;
+    width: 100%;
 }
 
 .sedesdep li
@@ -74,8 +61,115 @@ main > ul {
   color: #FFFFFF;
 }
 
+/* ========== TARJETAS DE DEPORTES ========== */
+
+.deportes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+
+.deporte-card {
+    background: rgba(212, 175, 55, 0.08);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    padding: 25px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.deporte-titulo {
+    color: #d4af37;
+    margin: 0;
+    font-size: 1.4rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.deporte-detalle {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    text-align: center;
+}
+
+.deporte-detalle p {
+    color: #e0e0e0;
+    margin: 6px 0;
+    font-size: 0.95rem;
+}
+
+.deporte-precio {
+    color: #4ade80 !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 12px !important;
+}
+
+.deporte-sedes {
+    color: #f59e0b !important;
+    margin: 8px 0 !important;
+    line-height: 1.5;
+}
+
+.deporte-horarios {
+    color: #60a5fa !important;
+    margin-top: 8px !important;
+}
+
+.deporte-card:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+}
+
+.deporte-card:hover .deporte-titulo {
+    transform: scale(1.05);
+}
+
+.deporte-card:hover .deporte-detalle {
+    max-height: 400px;
+    opacity: 1;
+}
+
+.sedes-links {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.sedes-links h2 {
+    color: #d4af37;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
 @media (max-width: 768px)
 {
+  .deportes-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 30px 15px;
+  }
+
+  .deporte-card {
+    min-height: 100px;
+    padding: 15px;
+  }
+
+  .deporte-titulo {
+    font-size: 1.1rem;
+  }
+
   .sedesdep
   {
     flex-direction: column;

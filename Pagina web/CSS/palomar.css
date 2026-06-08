@@ -1,3 +1,11 @@
+/* palomar.css
+   .titulo: encabezado de la sede Palomar en pages/palomar.html
+   .items: menú de navegación de pages/palomar.html
+   .palomar: contenedor principal de contenido de la sede Palomar
+   .horarios-turnos: cuadrícula de tarjetas de turnos deportivos
+   .turno-card: tarjeta individual de horario para Palomar
+*/
+
 .palomar {
     max-width: 1000px;
     margin: 0 auto;
@@ -65,21 +73,6 @@
     color: #f0f0f0;
     font-style: italic;
     margin-top: 10px;
-}
-
-.titulo {
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    font-weight: 400;
-    margin-bottom: 40px; 
-    margin-top: 10px;
-}
-
-.items {
-    display: flex; 
-    justify-content: center;
-    gap: 200px;
-    margin-bottom: 30px; 
 }
 
 @media (max-width: 760px) {

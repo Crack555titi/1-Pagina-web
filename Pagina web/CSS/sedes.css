@@ -1,0 +1,55 @@
+/* sedes.css
+   .titulo: encabezado de la página de sedes en pages/sedes.html
+   .items: menú de navegación de pages/sedes.html
+   .contenedor-sedes: layout de las tarjetas de sedes en pages/sedes.html
+   .sede: tarjeta individual de cada sede en pages/sedes.html
+*/
+
+.contenedor-sedes {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.sede {
+    flex: 1;
+    width: 320px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sede iframe {
+    width: 100%;
+    max-width: 100%;
+    min-height: 260px;
+    aspect-ratio: 4 / 3;
+    border: 0;
+    border-radius: 12px;
+}
+
+.sede:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+.sede h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #F5F5F7;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
