@@ -63,6 +63,51 @@
     border-color: rgba(95, 214, 132, 0.28);
 }
 
+.turno-card.gimnasio {
+    background: rgba(190, 90, 255, 0.12);
+    border-color: rgba(190, 90, 255, 0.28);
+}
+
+.turno-card.funcional {
+    background: rgba(96, 225, 255, 0.12);
+    border-color: rgba(96, 225, 255, 0.28);
+}
+
+.turno-card.pilates {
+    background: rgba(255, 180, 240, 0.12);
+    border-color: rgba(255, 180, 240, 0.28);
+}
+
+.turno-card.raqueta {
+    background: rgba(255, 210, 126, 0.12);
+    border-color: rgba(255, 210, 126, 0.28);
+}
+
+.turno-card.marcial {
+    background: rgba(255, 140, 90, 0.12);
+    border-color: rgba(255, 140, 90, 0.28);
+}
+
+.turno-card.natacion {
+    background: rgba(100, 180, 255, 0.12);
+    border-color: rgba(100, 180, 255, 0.28);
+}
+
+.turno-card.grupal {
+    background: rgba(255, 120, 190, 0.12);
+    border-color: rgba(255, 120, 190, 0.28);
+}
+
+.turno-card.basket {
+    background: rgba(255, 170, 90, 0.12);
+    border-color: rgba(255, 170, 90, 0.28);
+}
+
+.turno-card.playa {
+    background: rgba(135, 225, 170, 0.12);
+    border-color: rgba(135, 225, 170, 0.28);
+}
+
 .turno-card:hover {
     transform: translateY(-4px);
     border-color: rgba(212, 175, 55, 0.35);
@@ -71,6 +116,54 @@
 .turno-card h3 {
     color: #ffffff;
     margin-bottom: 12px;
+}
+
+.turno-card.futbol h3 {
+    color: #b9d9ff;
+}
+
+.turno-card.voley h3 {
+    color: #ffd5ca;
+}
+
+.turno-card.hockey h3 {
+    color: #d8ffd2;
+}
+
+.turno-card.gimnasio h3 {
+    color: #dab9ff;
+}
+
+.turno-card.funcional h3 {
+    color: #aef2ff;
+}
+
+.turno-card.pilates h3 {
+    color: #ffd4ff;
+}
+
+.turno-card.raqueta h3 {
+    color: #ffe8aa;
+}
+
+.turno-card.marcial h3 {
+    color: #ffccaa;
+}
+
+.turno-card.natacion h3 {
+    color: #c6e5ff;
+}
+
+.turno-card.grupal h3 {
+    color: #ffbad2;
+}
+
+.turno-card.basket h3 {
+    color: #ffd9ae;
+}
+
+.turno-card.playa h3 {
+    color: #c8ffd4;
 }
 
 .turno-card.futbol h3 {
