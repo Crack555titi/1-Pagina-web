@@ -10,6 +10,7 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 }
 
 main > ul {
@@ -70,24 +71,79 @@ main > ul {
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto 40px;
+    justify-items: center;
 }
 
 .deporte-card {
-    background: rgba(212, 175, 55, 0.08);
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    border-radius: 12px;
-    padding: 25px 20px;
+    background: rgba(15, 23, 42, 0.88);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 28px 22px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    min-height: 120px;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    min-height: 160px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.deporte-card:nth-child(1),
+.deporte-card:nth-child(2),
+.deporte-card:nth-child(3) {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.35);
+}
+
+.deporte-card:nth-child(4),
+.deporte-card:nth-child(5),
+.deporte-card:nth-child(6) {
+    background: rgba(249, 115, 22, 0.14);
+    border-color: rgba(249, 115, 22, 0.35);
+}
+
+.deporte-card:nth-child(7),
+.deporte-card:nth-child(8) {
+    background: rgba(34, 197, 94, 0.14);
+    border-color: rgba(34, 197, 94, 0.35);
+}
+
+.deporte-card:nth-child(9),
+.deporte-card:nth-child(10),
+.deporte-card:nth-child(11) {
+    background: rgba(168, 85, 247, 0.14);
+    border-color: rgba(168, 85, 247, 0.35);
+}
+
+.deporte-card:nth-child(12),
+.deporte-card:nth-child(13) {
+    background: rgba(244, 63, 94, 0.14);
+    border-color: rgba(244, 63, 94, 0.35);
+}
+
+.deporte-card:nth-child(14),
+.deporte-card:nth-child(15),
+.deporte-card:nth-child(16) {
+    background: rgba(20, 184, 166, 0.14);
+    border-color: rgba(20, 184, 166, 0.35);
+}
+
+.deporte-card:nth-child(17),
+.deporte-card:nth-child(18),
+.deporte-card:nth-child(19) {
+    background: rgba(251, 191, 36, 0.14);
+    border-color: rgba(251, 191, 36, 0.35);
+}
+
+.deporte-card:nth-child(20),
+.deporte-card:nth-child(21) {
+    background: rgba(56, 189, 248, 0.14);
+    border-color: rgba(56, 189, 248, 0.35);
 }
 
 .deporte-titulo {
-    color: #d4af37;
+    color: #f8fafc;
     margin: 0;
     font-size: 1.4rem;
     text-align: center;
@@ -95,34 +151,32 @@ main > ul {
 }
 
 .deporte-detalle {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 1;
     text-align: center;
+    margin-top: 14px;
 }
 
 .deporte-detalle p {
-    color: #e0e0e0;
+    color: #e2e8f0;
     margin: 6px 0;
     font-size: 0.95rem;
 }
 
 .deporte-precio {
-    color: #4ade80 !important;
-    font-weight: 700;
+    color: #facc15 !important;
+    font-weight: 800;
     font-size: 1.1rem;
     margin-bottom: 12px !important;
 }
 
 .deporte-sedes {
-    color: #f59e0b !important;
+    color: #93c5fd !important;
     margin: 8px 0 !important;
     line-height: 1.5;
 }
 
 .deporte-horarios {
-    color: #60a5fa !important;
+    color: #a78bfa !important;
     margin-top: 8px !important;
 }
 
