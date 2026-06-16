@@ -40,6 +40,7 @@ main {
     font-size   : clamp(2.5rem, 5vw, 4rem);    /*ajusta el tamaño de la fuente segun el tamaño de la pantalla*/
     letter-spacing: 0.2em;
     font-weight: 600;
+    text-align: center;
     text-transform: uppercase;
     color: #ffffff;
     text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
@@ -68,9 +69,7 @@ header {
     padding: 48px 20px 32px;
     border-bottom: 2px solid rgba(212, 175, 55, 0.3);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: relative;
 }
 
 nav 
@@ -220,5 +219,73 @@ footer {
     .titulo {
         padding-left: 0;
     }
+}
+.logo
+{
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  display: block;
+  width: 80px;
+  height: auto;
+}
+
+.logo img
+{
+  display: block;
+  width: 90px;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.logo img:hover
+{
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
+}
+.sedesdep {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.sedesdep li
+{
+  list-style: none;
+}
+
+.sedesdep a
+{
+  display: block;
+  padding: 15px 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1c1b1a 0%, #2a2a29 100%);
+  color: #d4af37;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  font-weight: 700;
+  letter-spacing: 1px;
+  min-width: 150px;
+  text-align: center;
+}
+.sedes-links {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.sedes-links h2 {
+    color: #d4af37;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
 }
 

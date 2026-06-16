@@ -1,75 +1,8 @@
-header 
-{
-    background: linear-gradient(180deg, #0B0B0B 0%, #111111 100%);
-    padding: 48px 20px 32px;
-    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+
 nav 
 {
     display: flex;
     justify-content: center;
-}
-
-.items 
-{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    background: rgba(212, 175, 55, 0.08);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 50px;
-    padding: 12px 20px;
-    width: fit-content;
-    margin: 24px auto 24px;
-    backdrop-filter: blur(10px);
-}
-
-.items li 
-{
-    list-style: none;
-}
-
-.items a 
-{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #F5F5F7;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.items a::before 
-{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: #d4af37;
-    transition: width 0.3s ease, left 0.3s ease;
-}
-
-.items a:hover::before
-{
-    width: 80%;
-    left: 10%;
-}
-
-.items a:hover {
-    background: rgba(212, 175, 55, 0.15);
-    color: #d4af37;
-    transform: translateY(-2px);
 }
 .nosotros {
     max-width: 900px;
@@ -93,37 +26,6 @@ nav
     line-height: 1.9;
     color: #e0e0e0;
     font-size: 1.05rem;
-}
-header
-{
-  position: relative; 
-  padding-left: 86px; 
-}
-
-.logo
-{
-  position: absolute;
-  left: 16px;
-  top: 12px;
-  display: block;
-  width: 80px;
-  height: auto;
-}
-
-.logo img
-{
-  display: block;
-  width: 90px;
-  height: auto;
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-}
-
-.logo img:hover
-{
-  transform: scale(1.05);
-  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
 }
 
 .contenedor-sedes

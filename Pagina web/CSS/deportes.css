@@ -1,9 +1,4 @@
-/* deportes.css
-   .titulo: encabezado de la página de deportes en pages/deportes.html
-   .items: menú de navegación de pages/deportes.html
-   .sedesdep: contenedor de enlaces a las sedes Palomar, Ramos y Capital
-   .sedesdep a: botones de navegación a sedes en pages/deportes.html
-*/
+
 
 main {
     display: flex;
@@ -18,41 +13,6 @@ main > ul {
     display: flex;
     justify-content: center;
 }
-
-.sedesdep {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
-    margin-top: 50px;
-    width: 100%;
-}
-
-.sedesdep li
-{
-  list-style: none;
-}
-
-.sedesdep a
-{
-  display: block;
-  padding: 15px 30px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #1c1b1a 0%, #2a2a29 100%);
-  color: #d4af37;
-  text-decoration: none;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  font-weight: 700;
-  letter-spacing: 1px;
-  min-width: 150px;
-  text-align: center;
-}
-
 .sedesdep a:hover
 {
   transform: translateY(-6px);
@@ -62,7 +22,7 @@ main > ul {
   color: #FFFFFF;
 }
 
-/* ========== TARJETAS DE DEPORTES ========== */
+/*TARJETAS DE DEPORTES */
 
 .deportes-container {
     display: grid;
@@ -195,18 +155,6 @@ main > ul {
     max-height: 400px;
     opacity: 1;
 }
-
-.sedes-links {
-    padding: 30px 20px;
-    text-align: center;
-}
-
-.sedes-links h2 {
-    color: #d4af37;
-    margin-bottom: 30px;
-    font-size: 1.5rem;
-}
-
 @media (max-width: 768px)
 {
   .deportes-container {

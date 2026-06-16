@@ -1,8 +1,18 @@
-/* contacto.css
-   .titulo: encabezado de página de contacto en pages/contacto.html
-   .items: menú de navegación de pages/contacto.html
-   .nosotros: sección de información de contacto en pages/contacto.html
-   .footer-content, .footer-section, .footer-bottom: pie de página común en todas las páginas
-*/
-
-/* Este archivo está disponible para futuras personalizaciones de página de contacto. */
+.red_social
+{
+  position: relative;
+  left: 16px;
+  top: 12px;
+  display: block;
+  width: 80px;
+  height: auto;
+}
+.red_social img
+{
+  display: block;
+  width: 90px;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}

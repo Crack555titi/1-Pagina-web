@@ -1,9 +1,3 @@
-/* sedes.css
-   .titulo: encabezado de la página de sedes en pages/sedes.html
-   .items: menú de navegación de pages/sedes.html
-   .contenedor-sedes: layout de las tarjetas de sedes en pages/sedes.html
-   .sede: tarjeta individual de cada sede en pages/sedes.html
-*/
 
 .contenedor-sedes {
     display: flex;
