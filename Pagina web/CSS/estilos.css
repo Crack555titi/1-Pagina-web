@@ -236,15 +236,8 @@ footer {
   width: 90px;
   height: auto;
   border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
 }
 
-.logo img:hover
-{
-  transform: scale(1.05);
-  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
-}
 .sedesdep {
     display: flex;
     gap: 20px;
