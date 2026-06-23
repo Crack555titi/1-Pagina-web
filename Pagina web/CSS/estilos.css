@@ -281,12 +281,16 @@ footer {
     margin-bottom: 30px;
     font-size: 1.5rem;
 }
-.Iniciar_sesion a
+.Iniciar_sesion
 {
     text-align: right;
-    font-family: 'Cinzel', serif;
     margin-bottom: 16px;
     margin-top: 0;
+    background-color: #999;
+}
+.Iniciar_sesion a
+{
+    font-family: 'Cinzel', serif;
     padding-left:100px;
     color: #FFFFFF;
     text-decoration: none;
