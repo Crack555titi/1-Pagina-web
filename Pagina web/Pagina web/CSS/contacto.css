@@ -1,0 +1,14 @@
+.red_social
+{
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto;
+}
+.red_social img
+{
+  display: block;
+  width: 90px;
+  height: auto;
+  border-radius: 8px;
+}
