@@ -1,0 +1,69 @@
+
+nav 
+{
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor-sedes
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 768px) {
+    main {
+        padding: 30px 15px;
+    }
+
+    header {
+        padding: 30px 15px 25px;
+    }
+
+    .logo {
+        position: relative;
+        left: 0;
+        top: 0;
+        text-align: center;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .items {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .items a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nosotros {
+        padding: 25px 15px;
+    }
+
+    .nosotros h2 {
+        font-size: 1.5rem;
+    }
+
+    .nosotros p {
+        font-size: 0.95rem;
+    }
+
+    .contenedor-sedes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sede {
+        max-width: 100%;
+        width: 100%;
+    }
+}
