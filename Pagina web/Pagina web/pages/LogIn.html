@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión | Aerum Club</title>
+
+    <link rel="stylesheet" href="/Pagina web/CSS/estilos.css">
+    <link rel="stylesheet" href="/Pagina web/CSS/login.css">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <form id="loginForm" class="login-box">
+
+        <h2>Iniciar Sesión</h2>
+
+        <div class="input-group">
+
+            <label>Correo electrónico</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="correo@ejemplo.com"
+                required
+            >
+
+            <small id="emailError"></small>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Contraseña</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="********"
+                required
+            >
+
+            <small id="passwordError"></small>
+
+        </div>
+
+        <div class="extras">
+
+            <label>
+
+                <input type="checkbox" id="remember">
+
+                Recordar sesión
+
+            </label>
+
+            <a href="#">¿Olvidaste tu contraseña?</a>
+
+        </div>
+
+        <button type="submit">
+
+            Ingresar
+
+        </button>
+
+    </form>
+
+</div>
+
+<script src="login.js"></script>
+
+</body>
+</html>
