@@ -1,10 +1,11 @@
+console.log("registro conectado")
 let user = {
     nombre: "",
     apellido: "",
     email: "",
     password: ""
 };
-
+let validacion = 0;
 function registrarUsuario() {
     user.nombre = document.getElementById("nombre").value;
     user.apellido = document.getElementById("apellido").value;
@@ -19,9 +20,10 @@ function validarUsuario() {
     let password = document.getElementById("password").value;
     if (email === user.email && password === user.password) {
         console.log("Usuario validado:", user);
-        return true;
+        validacion = 1;
     }else {
         console.log("Usuario no válido");
-        return false;
+        validacion = 0;
     }
+    eliminar_boton_registro(validacion); 
 }

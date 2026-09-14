@@ -1,7 +1,7 @@
-function volverPaginaAnterior() {
-    if (document.referrer) {
-        window.location.href = document.referrer;
-    } else {
-        window.location.href = "index.html";
+function volverPaginaAnterior() 
+{
+    if (document.referrer) 
+    {
+        window.location.href = "/Pagina%20web/index.html";
     }
 }
