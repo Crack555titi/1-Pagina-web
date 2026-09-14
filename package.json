@@ -1,0 +1,24 @@
+{
+  "name": "1-pagina-web",
+  "version": "1.0.0",
+  "description": "Este es un trabajo escolar que estamos haciendo con el objetio de aprender y profundizar los lengaujes de programacion HTML,CSS y JAVASCRIPT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crack555titi/1-Pagina-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Crack555titi/1-Pagina-web/issues"
+  },
+  "homepage": "https://github.com/Crack555titi/1-Pagina-web#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "sqlite3": "^6.0.1"
+  }
+}
