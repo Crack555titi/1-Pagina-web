@@ -1,11 +1,14 @@
-console.log("registro conectado")
+console.log("registro conectado");
+
 let user = {
     nombre: "",
     apellido: "",
     email: "",
     password: ""
 };
+
 let validacion = 0;
+
 function registrarUsuario() 
 {
     user.nombre = document.getElementById("nombre").value;
@@ -16,28 +19,63 @@ function registrarUsuario()
     console.log("Usuario registrado:", user);
 }
 
+// 1. AQUÍ ESTÁ EL CAMBIO IMPORTANTE:
 function validarUsuario() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    if (email === user.email && password === user.password) {
-        console.log("Usuario validado:", user);
-        validacion = 1;
-    }else {
-        console.log("Usuario no válido");
-        validacion = 0;
-    }
+    let emailInput = document.getElementById("email").value;
+    let passwordInput = document.getElementById("password").value;
+    
+    // Guardamos los datos que escribió el usuario en un paquetito
+    let datosAEnviar = {
+        email: emailInput,
+        password: passwordInput
+    };
+
+    console.log("Enviando datos a PHP...");
+
+   
+    fetch('login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify(datosAEnviar)
+    })
+    .then(respuesta => respuesta.json()) 
+    .then(data => {
+        
+        if (data.valido === true) {
+            console.log("¡Usuario validado por PHP y SQLite!");
+            validacion = data.validacion; 
+        } else {
+            console.log("Usuario no válido según la base de datos");
+            validacion = 0;
+        }
+
+        eliminar_boton_registro();
+    })
+    .catch(error => {
+        console.error("Hubo un error al conectar con PHP:", error);
+    });
 }
-    function eliminar_boton_registro() 
+
+function eliminar_boton_registro() 
 {
     console.log("eliminar_boton_registro conectado");
-    if (validacion == 0) 
+    
+    if (validacion == 1) 
     {
-        console.log("eliminar_boton_registro estado 0");
-        const elemento = document.querySelector(".register-container") && document.querySelector(".login-container");
-        if (elemento) {
-            console.log("eliminar_boton_registro elemento encontrado");
-            elemento.remove();
+        console.log("eliminar_boton_registro estado 1 (Usuario Válido)");
+        const contenedorRegistro = document.querySelector(".register-container");
+        const contenedorLogin = document.querySelector(".login-container");
+
+        if (contenedorRegistro) {
+            contenedorRegistro.remove();
+            console.log("Contenedor de registro eliminado");
+        }
+        
+        if (contenedorLogin) {
+            contenedorLogin.remove();
+            console.log("Contenedor de login eliminado");
         }
     }
 }
-

@@ -1,41 +1,47 @@
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+<?php
 
-const app = express();
-app.use(express.json()); // Permite al servidor leer formato JSON
 
-// Servir tus archivos HTML y JS automáticamente desde una carpeta llamada "public"
-app.use(express.static(path.join(__dirname, 'public')));
 
-// Conectar a tu base de datos SQLite
-const db = new sqlite3.Database('./sistema_usuarios.db', (err) => {
-    if (err) console.error("Error al abrir la base de datos", err);
-    else console.log("Conectado con éxito a SQLite");
-});
+header ('Content-Type: application/json');
 
-// RUTA DE LOGIN: Aquí es donde tu página web enviará los datos para validar
-app.post('/login', (req, require) => {
-    const { email, password } = req.body;
 
-    // Buscamos en la base de datos usando código SQL seguro
-    const sql = `SELECT validacion FROM usuarios WHERE email = ? AND password = ?`;
+$input = json_decode(file_get_contents('php://input'), true);
+$email = $input['email'] ?? '';
+$password = $input['password'] ?? '';
+
+try {
     
-    db.get(sql, [email, password], (err, row) => {
-        if (err) {
-            return res.status(500).json({ error: "Error en el servidor" });
-        }
-        
-        if (row) {
-            // Si encontró al usuario, devolvemos su estado de validación (1)
-            res.json({ valido: true, validacion: row.validacion });
-        } else {
-            // Si los datos están mal, devolvemos falso
-            res.json({ valido: false, validacion: 0 });
-        }
-    });
-});
+    $db = new PDO('sqlite:sistema_usuarios.db');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-app.listen(3000, () => {
-    console.log("Servidor corriendo en http://localhost:3000");
-});
+   
+    $sql = "SELECT validacion FROM usuarios WHERE email = :email AND password = :password";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([
+        ':email' => $email,
+        ':password' => $password
+    ]);
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  
+    if ($row) {
+        echo json_encode([
+            "valido" => true,
+            "validacion" => (int)$row['validacion']
+        ]);
+    } else {
+        echo json_encode([
+            "valido" => false,
+            "validacion" => 0
+        ]);
+    }
+
+} catch (PDOException $e) {
+    
+    echo json_encode([
+        "valido" => false,
+        "error" => $e->getMessage()
+    ]);
+}
+?>
