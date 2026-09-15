@@ -29,7 +29,7 @@ function validarUsuario(event) {
             // Verificamos si su validación es 1 (o la condición que tengas para verificado)
             if (data.validacion === 1) {
                 console.log("Usuario verificado. Redirigiendo al index...");
-                window.location.href = "index.html"; 
+                window.location.href = "../index.html"; 
             } else {
                 alert("Tu cuenta aún no está validada.");
             }
