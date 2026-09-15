@@ -17,7 +17,7 @@ if (!empty($email) && !empty($password)) {
          // Conexión a tu MySQL (phpMyAdmin)
         $host = 'localhost';
         $dbname = 'mi_paginaweb';
-        $username = 'root';
+        $username = 'tuti';
         $password_db = '';
 
         $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password_db);
