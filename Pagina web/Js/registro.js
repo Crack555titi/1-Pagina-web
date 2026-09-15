@@ -1,3 +1,22 @@
+window.addEventListener("DOMContentLoaded", () => {
+    fetch('comprobar_sesion.php')
+    .then(respuesta => respuesta.json())
+    .then(data => {
+        if (data.logueado === true) {
+            console.log("¡Sesión detectada en el servidor!");
+            const contenedorRegistro = document.querySelector(".register-container");
+            const contenedorLogin = document.querySelector(".login-container");
+            
+            if (contenedorRegistro) contenedorRegistro.remove();
+            if (contenedorLogin) contenedorLogin.remove();
+        } else {
+            console.log("No hay sesión activa. Mostrando formularios de ingreso.");
+        }
+    })
+    .catch(error => {
+        console.error("Error al comprobar la sesión:", error);
+    });
+});
 console.log("registro conectado");
 
 let user = {
