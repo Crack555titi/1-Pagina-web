@@ -20,9 +20,14 @@ if (isset($datos['email']) && isset($datos['password'])) {
     $password_ingresada = $datos['password'];
 
     try {
-        // 4. Conectamos a tu archivo de base de datos SQLite
-        // (Asegúrate de cambiar 'usuarios.db' por el nombre real de tu archivo si se llama distinto)
-        $db = new PDO('sqlite:usuarios.db');
+        // --- CAMBIO CLAVE: CONEXIÓN A MYSQL (PHPMYADMIN) ---
+        $host = 'localhost';
+        $dbname = 'mi_paginaweb'; // El nombre que le pusiste a tu base de datos
+        $username = 'root';       // El usuario por defecto de XAMPP
+        $password_db = '';        // La contraseña por defecto de XAMPP (vacía)
+
+        // Creamos la conexión a MySQL
+        $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password_db);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // 5. Buscamos al usuario por su correo electrónico
@@ -41,11 +46,12 @@ if (isset($datos['email']) && isset($datos['password'])) {
 
             // Llenamos la respuesta con los datos que tu JavaScript necesita para eliminar el botón
             $respuesta['valido'] = true;
-            $respuesta['validacion'] = $usuario['validacion']; // Esto enviará el número de validación que está en tu BD
+            $respuesta['validacion'] = (int)$usuario['validacion']; // Esto enviará el número de validación (1)
         }
 
     } catch (PDOException $e) {
-        // Si hay un error de conexión, no lo mostramos por seguridad, pero dejamos pasar la respuesta en falso
+        // Si hay un error de conexión, descomenta la línea de abajo para ver el error en la consola si falla
+        // $respuesta['error_de_conexion'] = $e->getMessage();
     }
 }
 
