@@ -35,7 +35,7 @@ try {
         if ($stmt_check->rowCount() > 0) {
             $respuesta["mensaje"] = "El correo electrónico ya está registrado.";
         } else {
-            $sql = "INSERT INTO usuarios (nombre, apellido, email, password, validacion) VALUES (:nombre, :apellido, :email, :password, 0)";
+            $sql = "INSERT INTO usuarios (nombre, apellido, email, password, validacion) VALUES (:nombre, :apellido, :email, :password, 1)";
             $stmt = $db->prepare($sql);
             $stmt->execute([
                 ':nombre' => $nombre,
