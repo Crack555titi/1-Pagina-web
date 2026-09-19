@@ -7,7 +7,7 @@ $json_recibido = file_get_contents('php://input');
 $datos = json_decode($json_recibido, true);
 
 // Definimos la acción para el Server.php
-$datos['accion'] = 'registro';
+$datos['accion'] = 'registrar';
 
 // RUTA COMPLETA Y CORREGIDA
 $ch = curl_init('http://localhost/1-Pagina-web/Pagina%20web/Server.php');
