@@ -117,3 +117,22 @@ button.oneclick-button {
     left: 10px;          
     z-index: 10;
 }
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #cccccc;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.register-link a {
+    color: #d4af37; 
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.register-link a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
