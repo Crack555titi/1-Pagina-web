@@ -284,8 +284,9 @@ footer {
 .Iniciar_sesion
 {
     position: absolute;
-    margin-top: 5px;  
-    right: 40px;
+    margin-top: 4px;  
+    top: 1px;
+    right: 10px;
     margin-bottom: 30px; 
 }
 
