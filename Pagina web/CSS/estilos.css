@@ -288,6 +288,9 @@ footer {
     top: 1px;
     right: 10px;
     margin-bottom: 30px; 
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .Iniciar_sesion a
@@ -317,4 +320,27 @@ footer {
 .Iniciar_sesion a:active
 {
     transform: translateY(0);
+}
+
+
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.avatar-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #d4af37;
+    object-fit: cover;
+}
+
+.user-name {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
 }
