@@ -1,24 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Consultamos al backend si hay sesión activa
     fetch('php/check_session.php')
-        .then(respuesta => respuesta.json())
+        .then(res => res.json())
         .then(data => {
             const btnLogin = document.getElementById('btnLogin');
-            const userProfile = document.getElementById('userProfile');
+            const btnPerfil = document.getElementById('btnPerfil');
             const userName = document.getElementById('userName');
+            const menuUserName = document.getElementById('menuUserName');
 
-            if (data.logueado === true) {
-                // Usuario logueado: Ocultamos botón y mostramos avatar
+            if (data.logueado) {
                 if (btnLogin) btnLogin.style.display = 'none';
-                if (userProfile) userProfile.style.display = 'flex';
+                if (btnPerfil) btnPerfil.style.display = 'flex';
+                
                 if (userName) userName.textContent = data.nombre;
+                if (menuUserName) menuUserName.textContent = "Hola, " + data.nombre;
             } else {
-                // Usuario no logueado: Mostramos botón y ocultamos avatar
                 if (btnLogin) btnLogin.style.display = 'inline-block';
-                if (userProfile) userProfile.style.display = 'none';
+                if (btnPerfil) btnPerfil.style.display = 'none';
             }
-        })
-        .catch(error => {
-            console.error("Error comprobando la sesión:", error);
         });
 });
+
+// Función para abrir y cerrar el panel izquierdo
+function toggleMenu() {
+    const menu = document.getElementById('sideMenu');
+    menu.classList.toggle('active');
+}
