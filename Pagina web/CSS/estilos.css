@@ -344,3 +344,66 @@ footer {
     font-weight: bold;
     font-size: 14px;
 }
+/* Botón de Perfil */
+.btn-perfil {
+    background-color: #d4af37;
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Panel Lateral Izquierdo */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Oculto fuera de la pantalla a la izquierda */
+    width: 250px;
+    height: 100%;
+    background-color: #111111;
+    color: #ffffff;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.7);
+    transition: left 0.3s ease; /* Desplazamiento suave */
+    z-index: 1000;
+    padding: 20px;
+}
+
+/* Clase para desplegar el panel hacia la derecha */
+.side-menu.active {
+    left: 0;
+}
+
+/* Estilos internos del menú */
+.side-menu .close-btn {
+    background: none;
+    border: none;
+    color: #d4af37;
+    font-size: 20px;
+    float: right;
+    cursor: pointer;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.side-menu ul li {
+    margin: 15px 0;
+}
+
+.side-menu ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.side-menu ul li a:hover {
+    color: #d4af37;
+}
