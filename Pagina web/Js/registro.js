@@ -77,6 +77,7 @@ function registrarUsuario(event) {
     .then(data => {
         if (data.exito === true || data.valido === true) {
             alert("¡Cuenta creada con éxito!");
+            localStorage.setItem("usuario_nombre", data.usuario_nombre);
             window.location.href = "../index.html";
         } else {
             alert("Error: " + (data.mensaje || "No se pudo completar el registro."));
