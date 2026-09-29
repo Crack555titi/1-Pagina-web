@@ -1,31 +1,23 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lange="es">
     <head>
         <title>AERUS CLUB</title>
         <link rel="stylesheet" href="CSS/home.css">
         <link rel="stylesheet" href="CSS/estilos.css">
         <script src="js/scripts.js"></script>
+        <script src="js/registro.js"></script>
+       
     </head>
     <body>
         <header>
             <section class="logo">
                  <img src="imagenes/Lgo.png" alt="Aerus Club logo">
             </section>
-
-            <!-- Sección de usuario / login -->
             <section class="Iniciar_sesion">
-                <!-- Botón de Log in (visible si NO hay sesión) -->
-                <a href="pages/LogIn.html" id="btnLogin"><strong>Log in</strong></a>
-
-                <!-- Perfil con foto (se activa con clic para abrir el menú lateral) -->
-                <div id="userProfile" class="user-profile" onclick="toggleMenu()" style="display: none;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Perfil" class="avatar-img">
-                    <span id="userName" class="user-name"></span>
-                </div>
+                <a href="pages/LogIn.html"><strong>Log in</strong></a>
             </section>
-
             <section class="titulo"> 
-                <h1>AERUS Club, Mas Que un Club</h1>
+            <h1>AERUS Club, Mas Que un Club</h1>
             </section>
             
             <nav> 
@@ -37,26 +29,12 @@
                 </ul>
             </nav>
         </header>
-
         <main>
             <section class="nosotros">
                 <h2>Acerca de nosotros</h2>
                 <p>En aerus club creemos que el deporte es mucho más que competir: es disciplina, unión y pasión compartida. Nacimos con la idea de crear un espacio donde cada entrenamiento, cada partido y cada desafío se conviertan en una oportunidad para crecer juntos.</p>
             </section>
         </main>
-
-        <!-- PANAL DESPLEGABLE LATERAL (IZQUIERDA) -->
-        <div id="sideMenu" class="side-menu">
-            <button class="close-btn" onclick="toggleMenu()">✕</button>
-            <h3 id="menuUserName">Mi Perfil</h3>
-            <hr>
-            <ul>
-                <li><a href="#">Mi Cuenta</a></li>
-                <li><a href="#">Mis Pagos</a></li>
-                <li><a href="php/logout.php">Cerrar Sesión</a></li>
-            </ul>
-        </div>
-
         <footer>
             <div class="footer-content">
                 <div class="footer-section">
@@ -80,8 +58,6 @@
                 <p>&copy; 2026 AERUS CLUB. Todos los derechos reservados.</p>
             </div>
         </footer>
-
-        <!-- Script de sesión cargado al final del body -->
-        <script src="js/sessionCheck.js"></script>
     </body>
+   
 </html>

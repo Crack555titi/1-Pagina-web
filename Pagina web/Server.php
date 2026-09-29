@@ -4,7 +4,7 @@ session_start();
 header('Content-Type: application/json');
 
 $input = json_decode(file_get_contents('php://input'), true);
-$accion = $input['accion'] ?? '';
+$accion = $input['accion'] ?? ''; // Identificamos si nos piden 'login' o 'registrar'
 
 $respuesta = [
     "exito" => false,
@@ -12,6 +12,7 @@ $respuesta = [
 ];
 
 try {
+    // Conexión única a tu base de datos MySQL
     $host = 'localhost';
     $dbname = 'mi_paginaweb';
     $username = 'root';
@@ -20,13 +21,14 @@ try {
     $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password_db);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // --- REGISTRO ---
+    // --- CASO 1: REGISTRAR USUARIO ---
     if ($accion === 'registrar') {
         $nombre = $input['nombre'] ?? '';
         $apellido = $input['apellido'] ?? '';
         $email = $input['email'] ?? '';
         $password = $input['password'] ?? '';
 
+        // Verificar si el correo ya existe
         $stmt_check = $db->prepare("SELECT id FROM usuarios WHERE email = :email");
         $stmt_check->execute([':email' => $email]);
 
@@ -43,14 +45,11 @@ try {
             ]);
 
             $respuesta["exito"] = true;
-            $respuesta["valido"] = true;
-            $respuesta["usuario_id"] = $db->lastInsertId();
-            $respuesta["usuario_nombre"] = $nombre;
-            $respuesta["mensaje"] = "¡Usuario registrado e iniciado con éxito!";
+            $respuesta["mensaje"] = "¡Usuario registrado con éxito!";
         }
     }
 
-    // --- LOGIN ---
+    // --- CASO 2: LOGIN ---
     if ($accion === 'login') {
         $email = $input['email'] ?? '';
         $password = $input['password'] ?? '';
@@ -60,10 +59,12 @@ try {
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario && $password === $usuario['password']) {
+            $_SESSION['usuario_id'] = $usuario['id'];
+            $_SESSION['usuario_nombre'] = $usuario['nombre'];
+
             $respuesta["exito"] = true;
             $respuesta["valido"] = true;
-            $respuesta["usuario_id"] = $usuario['id'];
-            $respuesta["usuario_nombre"] = $usuario['nombre'];
+            $respuesta["validacion"] = (int)$usuario['validacion'];
             $respuesta["mensaje"] = "Login correcto";
         } else {
             $respuesta["mensaje"] = "Credenciales incorrectas";
