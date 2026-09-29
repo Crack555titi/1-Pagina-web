@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // 2. En cualquier otra página, oculta el botón de login y muestra el usuario
-        const btnLogin = document.getElementById("btnLogin");
-        const userProfile = document.getElementById("userProfile");
-        const userName = document.getElementById("userName");
+       const boton = document.querySelector('.Iniciar_sesion');
+        boton.remove();
+
 
         if (btnLogin) btnLogin.style.display = "none";
         if (userProfile) userProfile.style.display = "flex";

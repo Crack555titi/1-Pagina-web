@@ -4,7 +4,6 @@
         <title>AERUS CLUB</title>
         <link rel="stylesheet" href="CSS/home.css">
         <link rel="stylesheet" href="CSS/estilos.css">
-        <script src="js/scripts.js"></script>
         <script src="js/registro.js"></script>
         <script src="js/auth.js"></script>
        
@@ -59,6 +58,21 @@
                 <p>&copy; 2026 AERUS CLUB. Todos los derechos reservados.</p>
             </div>
         </footer>
+            <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const nombre = localStorage.getItem("usuario_nombre");
+
+        if (nombre) {
+            const btnLogin = document.getElementById("btnLogin");
+            const userProfile = document.getElementById("userProfile");
+            const userName = document.getElementById("userName");
+
+            if (btnLogin) btnLogin.style.display = "none";
+            if (userProfile) userProfile.style.display = "flex";
+            if (userName) userName.textContent = nombre;
+        }
+    });
+</script>
     </body>
    
 </html>
