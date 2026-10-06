@@ -1,19 +1,17 @@
 <?php
 session_start();
 
-// Respuesta inicial
+// respuesta diciendo que NO está logueado
 $respuesta = [
     "logueado" => false
 ];
 
-// Si existe la sesión del usuario, devolvemos su información
+//  Si existe la sesión del usuario, cambiamos la respuesta a TRUE
 if (isset($_SESSION['usuario_id'])) {
     $respuesta["logueado"] = true;
-    $respuesta["nombre"] = $_SESSION['usuario_nombre'] ?? "Usuario";
-    $respuesta["imagen"] = $_SESSION['usuario_imagen'] ?? "default.png"; // Imagen por defecto
 }
 
 header('Content-Type: application/json');
-echo json_encode($respuesta);
+echo json_encode($respuesta);//respondemos en json
 exit();
 ?>

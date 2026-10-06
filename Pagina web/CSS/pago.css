@@ -1,0 +1,2 @@
+main:has(> .payment-shell) { display:flex; align-items:center; justify-content:center; }
+.payment-shell { width:min(760px,100%); padding:50px; text-align:center; border:1px solid rgba(212,175,55,.25); border-radius:24px; background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015)); }
