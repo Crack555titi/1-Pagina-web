@@ -28,7 +28,6 @@ try {
         $email = $input['email'] ?? '';
         $password = $input['password'] ?? '';
 
-        // Verificar si el correo ya existe
         $stmt_check = $db->prepare("SELECT id FROM usuarios WHERE email = :email");
         $stmt_check->execute([':email' => $email]);
 
@@ -44,12 +43,25 @@ try {
                 ':password' => $password
             ]);
 
+            $usuarioId = (int)$db->lastInsertId();
+            $_SESSION['usuario_id'] = $usuarioId;
+            $_SESSION['usuario_nombre'] = $nombre;
+            $_SESSION['usuario_apellido'] = $apellido;
+            $_SESSION['usuario_email'] = $email;
+            $_SESSION['usuario_avatar'] = $_SESSION['usuario_avatar'] ?? '';
+
             $respuesta["exito"] = true;
             $respuesta["mensaje"] = "¡Usuario registrado con éxito!";
+            $respuesta["usuario"] = [
+                "id" => $usuarioId,
+                "nombre" => $nombre,
+                "apellido" => $apellido,
+                "email" => $email,
+                "avatar" => $_SESSION['usuario_avatar']
+            ];
         }
     }
 
-    // --- CASO 2: LOGIN ---
     if ($accion === 'login') {
         $email = $input['email'] ?? '';
         $password = $input['password'] ?? '';
@@ -61,11 +73,21 @@ try {
         if ($usuario && $password === $usuario['password']) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nombre'] = $usuario['nombre'];
+            $_SESSION['usuario_apellido'] = $usuario['apellido'];
+            $_SESSION['usuario_email'] = $usuario['email'];
+            $_SESSION['usuario_avatar'] = $_SESSION['usuario_avatar'] ?? '';
 
             $respuesta["exito"] = true;
             $respuesta["valido"] = true;
             $respuesta["validacion"] = (int)$usuario['validacion'];
             $respuesta["mensaje"] = "Login correcto";
+            $respuesta["usuario"] = [
+                "id" => (int)$usuario['id'],
+                "nombre" => $usuario['nombre'],
+                "apellido" => $usuario['apellido'],
+                "email" => $usuario['email'],
+                "avatar" => $_SESSION['usuario_avatar']
+            ];
         } else {
             $respuesta["mensaje"] = "Credenciales incorrectas";
         }
