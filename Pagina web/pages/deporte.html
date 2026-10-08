@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Historia del deporte | Aerus Club</title>
+        <link rel="stylesheet" href="../CSS/estilos.css">
+        <script src="../Js/deportes-data.js"></script>
+        <script src="../Js/auth.js" defer></script>
+        <script src="../Js/vida.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <section class="logo"><a href="../index.html"><img src="../imagenes/Lgo.png" alt="Aerus Club logo"></a></section>
+            <section class="Iniciar_sesion" id="userButtonRoot" aria-live="polite"></section>
+            <section class="titulo"><h1 id="tituloH1">DEPORTES</h1><p class="lema">Historia en el club</p></section>
+            <nav>
+                <ul class="items">
+                    <li><a href="../index.html"> Inicio </a></li>
+                    <li><a href="sedes.html"> Nuestras Sedes</a></li>
+                    <li><a href="deportes.html"> Deportes </a></li>
+                    <li><a href="contacto.html"> Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main id="contenido"></main>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section"><h3>AERUS CLUB</h3><p>Tu club de deportes con pasión y dedicación. Múltiples sedes para tu comodidad.</p></div>
+                <div class="footer-section"><h3>Navegación</h3><a href="contacto.html">Contacto</a><br><a href="sedes.html">Nuestras Sedes</a><br><a href="../index.html">Inicio</a></div>
+                <div class="footer-section"><h3>Nuestras Sedes</h3><p><strong>Palomar</strong><br>Lun-Sáb 8hs a 23hs</p><p><strong>Villa Luzuriaga</strong><br>Lun-Sáb 7hs a 22hs</p><p><strong>Parque Patricio</strong><br>Lun-Sáb 5hs a 21hs</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 AERUS CLUB. Todos los derechos reservados.</p></div>
+        </footer>
+        <script>
+        (function () {
+            const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+            const slug = new URLSearchParams(location.search).get('d');
+            const i = DEPORTES.findIndex(d => d.slug === slug);
+            const main = document.getElementById('contenido');
+            if (i < 0) {
+                main.innerHTML = '<div class="vacio"><h2>No encontramos ese deporte</h2><p>Volvé al listado y elegí uno.</p><div class="hero-actions"><a class="hero-btn primary" href="deportes.html">Ver deportes</a></div></div>';
+                return;
+            }
+            const d = DEPORTES[i], prev = DEPORTES[(i + DEPORTES.length - 1) % DEPORTES.length], next = DEPORTES[(i + 1) % DEPORTES.length];
+            document.title = d.nombre + ' | Historia en Aerus Club';
+            document.getElementById('tituloH1').textContent = d.nombre;
+            const hitos = d.hitos.map((h, k) => `
+                <article class="hito reveal">
+                    <div class="texto"><span class="anio">${h.a}</span><p>${esc(h.t)}</p></div>
+                    <div></div>
+                </article>`).join('');
+            main.innerHTML = `
+                <div class="dep-hero">
+                    <img src="../imagenes/cat-${d.cat}.jpg" alt="Foto histórica de ${esc(d.nombre)}">
+                    <div class="dep-hero-txt"><span class="desde">En el club desde ${d.anio}</span><h2>${d.emoji} ${esc(d.nombre)}</h2></div>
+                </div>
+                <div class="dep-wrap">
+                    <div class="chips reveal">
+                        <div class="chip"><b>Cuota</b>${esc(d.precio)}</div>
+                        <div class="chip"><b>Sedes</b>${esc(d.sedes)}</div>
+                        <div class="chip"><b>Horarios</b>${esc(d.horarios)}</div>
+                    </div>
+                    <div class="sec-head reveal"><small>Nuestra historia</small><h2>${esc(d.nombre)} en Aerus</h2></div>
+                    <div class="linea" style="--x:0">${hitos}</div>
+                    <div class="dep-titulos reveal"><h3>Títulos y logros</h3><ul>${d.titulos.map(t => '<li>' + esc(t) + '</li>').join('')}</ul></div>
+                    <div class="hero-actions reveal"><a class="hero-btn primary" href="Pago.html">Sumate a ${esc(d.nombre)}</a><a class="hero-btn secondary" href="deportes.html">Ver todos los deportes</a></div>
+                    <div class="dep-nav">
+                        <a class="hero-btn secondary" href="deporte.html?d=${prev.slug}">← ${esc(prev.nombre)}</a>
+                        <a class="hero-btn secondary" href="deporte.html?d=${next.slug}">${esc(next.nombre)} →</a>
+                    </div>
+                </div>`;
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+        })();
+        </script>
+    </body>
+</html>

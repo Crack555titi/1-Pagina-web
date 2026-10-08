@@ -10,10 +10,10 @@
         <meta property="og:title" content="Aerus Club | Club deportivo en Buenos Aires">
         <meta property="og:description" content="Conocé nuestras actividades deportivas, horarios y sedes en Buenos Aires.">
         <title>Aerus Club | Club deportivo en Buenos Aires</title>
-        <link rel="stylesheet" href="CSS/home.css">
         <link rel="stylesheet" href="CSS/estilos.css">
-        <script src="Js/registro.js"></script>
-        <script src="Js/auth.js"></script>
+        <script src="Js/registro.js" defer></script>
+        <script src="Js/auth.js" defer></script>
+        <script src="Js/vida.js" defer></script>
        
     </head>
     <body>
@@ -24,6 +24,7 @@
             <section class="Iniciar_sesion" id="userButtonRoot" aria-live="polite"></section>
             <section class="titulo"> 
             <h1>AERUS Club, Más Que un Club</h1>
+            <p class="lema">Desde 1952 · Pasión de barrio</p>
             </section>
             
             <nav> 
@@ -42,6 +43,69 @@
                 <div class="hero-actions">
                     <a class="hero-btn primary" href="pages/Pago.html">Hacete socio</a>
                     <a class="hero-btn secondary" href="pages/deportes.html">Explorar deportes</a>
+                </div>
+            </section>
+
+            <section class="historia" id="historia">
+                <div class="sec-head reveal">
+                    <small>Nuestra historia</small>
+                    <h2>Más de siete décadas haciendo camino</h2>
+                </div>
+
+                <div class="hist-intro reveal">
+                    <div>
+                        <p>Todo empezó en <strong>1952</strong>, cuando un grupo de vecinos de Palomar encabezado por <strong>Don Aurelio Ferreyra</strong> juntó entre todos los ladrillos, las maderas y unos cuantos pesos para levantar una canchita donde los pibes pudieran jugar sin cruzar las vías.</p>
+                        <p>Aquel domingo de inauguración asistieron más de 400 personas, se cortó una cinta celeste y dorada, y el primer equipo de fútbol salió a la cancha con camisetas prestadas. Desde entonces, el club no paró de crecer: nuevas sedes, nuevas disciplinas y, sobre todo, nuevas generaciones que llevan los colores con orgullo.</p>
+                    </div>
+                    <figure class="foto" style="--rot:2deg">
+                        <img src="imagenes/hist-1952.jpg" alt="Inauguración del club en 1952" loading="lazy">
+                        <figcaption>Inauguración del club · Palomar, 1952</figcaption>
+                    </figure>
+                </div>
+
+                <div class="linea">
+                    <article class="hito reveal">
+                        <div class="texto"><span class="anio">1968</span><h3>El primer gran ascenso</h3><p>El equipo de fútbol logra 14 partidos invictos y asciende a la liga metropolitana. Ese mismo año nace la sección de karate en el sótano de la sede.</p></div>
+                        <figure class="foto" style="--rot:-2deg"><img src="imagenes/hist-1968.jpg" alt="Plantel campeón de 1968" loading="lazy"><figcaption>El plantel del ascenso · 1968</figcaption></figure>
+                    </article>
+                    <article class="hito reveal">
+                        <div class="texto"><span class="anio">1974</span><h3>La pileta del barrio</h3><p>Se inaugura la primera pileta de 25 metros del barrio. Durante años fue el lugar donde aprendieron a nadar tres generaciones de familias.</p></div>
+                        <figure class="foto" style="--rot:2deg"><img src="imagenes/cat-agua.jpg" alt="La pileta del club en los años 70" loading="lazy"><figcaption>Temporada de verano · 1975</figcaption></figure>
+                    </article>
+                    <article class="hito reveal">
+                        <div class="texto"><span class="anio">1987</span><h3>El equipo del 87</h3><p>Campeón de la Liga Metropolitana ante una tribuna desbordada. La caravana por el barrio duró hasta la madrugada y todavía se cuenta en las mesas del buffet.</p></div>
+                        <figure class="foto" style="--rot:-1.5deg"><img src="imagenes/hist-1987.jpg" alt="Cancha del club en 1987" loading="lazy"><figcaption>Final del campeonato · 1987</figcaption></figure>
+                    </article>
+                    <article class="hito reveal">
+                        <div class="texto"><span class="anio">2004</span><h3>La Copa de Oro</h3><p>Con la mejor camada de juveniles de la historia, el club conquista la Copa de Oro y se consolida como referente deportivo de la zona oeste.</p></div>
+                        <figure class="foto" style="--rot:2deg"><img src="imagenes/hist-2004.jpg" alt="Plantel campeón de 2004" loading="lazy"><figcaption>Campeones de la Copa de Oro · 2004</figcaption></figure>
+                    </article>
+                    <article class="hito reveal sin-foto">
+                        <div class="texto"><span class="anio">2018 → hoy</span><h3>Tres sedes, una sola familia</h3><p>Con la apertura de Parque Patricio, Aerus completa sus tres sedes y suma más de 30 disciplinas para que cada socio encuentre su lugar.</p></div>
+                    </article>
+                </div>
+
+                <div class="vitrina reveal">
+                    <div class="sec-head" style="margin-bottom:28px"><small>Sala de trofeos</small><h2>Una vitrina que no entra en la pared</h2></div>
+                    <div class="vitrina-grid">
+                        <figure class="foto" style="--rot:-2deg"><img src="imagenes/hist-trofeos.jpg" alt="Sala de trofeos del club" loading="lazy"><figcaption>Nuestra sala de trofeos</figcaption></figure>
+                        <div>
+                            <div class="contadores">
+                                <div class="contador"><b data-count="74">0</b><span>Años de historia</span></div>
+                                <div class="contador"><b data-count="38">0</b><span>Títulos oficiales</span></div>
+                                <div class="contador"><b data-count="12">0</b><span>Copas internacionales</span></div>
+                                <div class="contador"><b data-count="30" data-plus="1">0</b><span>Disciplinas</span></div>
+                            </div>
+                            <ul class="palmares">
+                                <li><b>1968</b> · Ascenso a Primera, fútbol</li>
+                                <li><b>1987</b> · Campeón Liga Metropolitana</li>
+                                <li><b>1993</b> · Campeón argentino de boxeo amateur</li>
+                                <li><b>2002</b> · Campeón provincial de básquet</li>
+                                <li><b>2004</b> · Copa de Oro Aerus</li>
+                                <li><b>2015</b> · Bicampeonato de vóley femenino</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
