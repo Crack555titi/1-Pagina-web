@@ -2,6 +2,6 @@ function volverPaginaAnterior()
 {
     if (document.referrer) 
     {
-        window.location.href = "/1-Pagina-web/";
+        window.location.href = "/Pagina%20web/";
     }
 }
