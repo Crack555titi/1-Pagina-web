@@ -12,6 +12,7 @@
         <title>Sedes y horarios | Aerus Club</title>
         <link rel="stylesheet" href="../CSS/sedes.css">
         <link rel="stylesheet" href="../CSS/estilos.css">
+        <link rel="stylesheet" href="../CSS/extras.css">
         <link rel="preconnect" href="https://maps.googleapis.com">
         <script src="Js/registro.js"></script>
         <script src="../Js/auth.js"></script>
@@ -39,7 +40,7 @@
         </header>
         <main>
             <div class="contenedor-sedes">
-                <section id="Palomar" class="sede">
+                <section id="Palomar" class="sede" data-sede="palomar">
                     <h2>Sede Palomar</h2>
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52547.352415257374!2d-58.65801197832031!3d-34.5988629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb84d00a8c91b%3A0xbcc1aa1f048ebd3c!2sClub%20AFALP!5e0!3m2!1ses!2sar!4v1780402203372!5m2!1ses!2sar" 
@@ -55,7 +56,7 @@
                     <p>Domingo: de 9hs a 21hs</p>
                 </section>
 
-                <section id="Villa-luzuriaga" class="sede">
+                <section id="Villa-luzuriaga" class="sede" data-sede="villa-luzuriaga">
                     <h2>Sede Villa Luzuriaga</h2>
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.2290464077796!2d-58.589732524880795!3d-34.67416826122112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc7c2adb51d89%3A0x4cd13e6de367e239!2sRED%20FITNESS%20CLUB%20(Sede%20Salamanca)!5e0!3m2!1ses!2sar!4v1780402689031!5m2!1ses!2sar" 
@@ -71,7 +72,7 @@
                     <p>Domingo: de 9hs a 21hs</p>
                 </section>
                 
-                <section id="Parque Patricio" class="sede">
+                <section id="Parque Patricio" class="sede" data-sede="parque-patricio">
                     <h2>Sede Parque Patricio</h2>
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.6858075123414!2d-58.410597423416355!3d-34.637379359278285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb0e4d34e289%3A0x1138b4a8351088cd!2sHurac%C3%A1n%20Social%20Gym!5e0!3m2!1ses!2sar!4v1780524268274!5m2!1ses!2sar" 
@@ -111,5 +112,7 @@
                 <p>&copy; 2026 AERUS CLUB. Todos los derechos reservados.</p>
             </div>
         </footer>
-    </body>
+        <script src="../Js/sedes-data.js"></script>
+    <script src="../Js/sedes.js"></script>
+</body>
 </html>

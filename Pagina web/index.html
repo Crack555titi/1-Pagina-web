@@ -11,9 +11,11 @@
         <meta property="og:description" content="Conocé nuestras actividades deportivas, horarios y sedes en Buenos Aires.">
         <title>Aerus Club | Club deportivo en Buenos Aires</title>
         <link rel="stylesheet" href="CSS/estilos.css">
+        <link rel="stylesheet" href="CSS/extras.css">
         <script src="Js/registro.js" defer></script>
         <script src="Js/auth.js" defer></script>
         <script src="Js/vida.js" defer></script>
+        <script src="Js/inicio.js" defer></script>
        
     </head>
     <body>
@@ -44,6 +46,11 @@
                     <a class="hero-btn primary" href="pages/Pago.html">Hacete socio</a>
                     <a class="hero-btn secondary" href="pages/deportes.html">Explorar deportes</a>
                 </div>
+            </section>
+
+            <section class="novedades" aria-label="Novedades del club">
+                <span class="nov-label">Novedades</span>
+                <div class="nov-track"><div class="nov-list" id="novList"></div></div>
             </section>
 
             <section class="historia" id="historia">
@@ -107,6 +114,32 @@
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <section class="sec-wrap" id="eventos">
+                <div class="sec-head reveal">
+                    <small>Agenda</small>
+                    <h2>Próximos eventos</h2>
+                </div>
+                <div class="eventos" id="eventosList"></div>
+            </section>
+
+            <section class="sec-wrap" id="testimonios">
+                <div class="sec-head reveal">
+                    <small>Comunidad</small>
+                    <h2>Lo que dicen nuestros socios</h2>
+                </div>
+                <div class="testi-grid" id="testiGrid"></div>
+                <form class="testi-form reveal" id="testiForm" novalidate>
+                    <h3>Dejá tu comentario</h3>
+                    <div class="fila">
+                        <label class="campo">Tu nombre<input name="nombre" maxlength="40" autocomplete="name" required></label>
+                        <label class="campo">Puntaje<select name="estrellas"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></label>
+                    </div>
+                    <label class="campo">Tu experiencia en el club<textarea name="texto" maxlength="240" required></textarea></label>
+                    <button class="hero-btn primary" type="submit">Publicar comentario</button>
+                    <p class="form-msg" id="testiMsg" aria-live="polite"></p>
+                </form>
             </section>
         </main>
         <footer>

@@ -12,6 +12,7 @@
         <title>Deportes y actividades | Aerus Club</title>
         <link rel="stylesheet" href="../CSS/deportes.css">
         <link rel="stylesheet" href="../CSS/estilos.css">
+        <link rel="stylesheet" href="../CSS/extras.css">
                 <script src="../Js/auth.js" defer></script>
     </head>
     <body>
@@ -47,6 +48,17 @@
                     </section>
                 </ul>
             </section>
+            <form class="filtros" id="filtros" aria-label="Filtrar deportes">
+                <label class="campo">Sede
+                    <select id="fSede"><option value="">Todas las sedes</option><option value="Palomar">Palomar</option><option value="Villa Luzuriaga">Villa Luzuriaga</option><option value="Parque Patricio">Parque Patricio</option></select></label>
+                <label class="campo">Categoría
+                    <select id="fCat"><option value="">Todas las categorías</option><option value="campo">Campo y aire libre</option><option value="indoor">Cancha cubierta</option><option value="gym">Gimnasio y clases</option><option value="ring">Artes marciales y combate</option><option value="agua">Natación</option></select></label>
+                <label class="campo">Precio mensual
+                    <select id="fPrecio"><option value="">Cualquier precio</option><option value="0-350">Hasta $350</option><option value="351-450">$351 a $450</option><option value="451-550">$451 a $550</option><option value="551-9999">Más de $550</option></select></label>
+                <button type="reset" id="fLimpiar">Limpiar</button>
+                <p class="f-count" id="fCount" aria-live="polite"></p>
+            </form>
+            <p class="sin-resultados" id="sinRes" hidden>No hay deportes que coincidan con esos filtros. Probá con otra combinación.</p>
             <section class="deportes-container">
                 <a class="deporte-link" href="deporte.html?d=futbol-5"><article class="deporte-card">
                     <h3 class="deporte-titulo">⚽ Fútbol 5</h3>
@@ -350,6 +362,8 @@
                 <p>&copy; 2026 AERUS CLUB. Todos los derechos reservados.</p>
             </div>
         </footer>
-    </body>
+        <script src="../Js/deportes-data.js"></script>
+    <script src="../Js/filtro-deportes.js"></script>
+</body>
    
 </html>
