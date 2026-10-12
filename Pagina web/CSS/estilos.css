@@ -604,3 +604,19 @@ a.deporte-link .deporte-card { height: 100%; }
 .dep-wrap .hito:nth-child(odd) .texto { grid-column: 1; }
 .dep-wrap .hito:nth-child(even) .texto { grid-column: 2; order: initial; }
 @media (max-width:860px){ .dep-wrap .hito:nth-child(even) .texto{grid-column:1;} .dep-wrap .hito > div:empty{display:none;} }
+
+/* ===== Acento de color por disciplina (clases futbol, voley, hockey... de .turno-card) ===== */
+.turno-card.futbol     { --acc: #5fbf7f; }
+.turno-card.voley      { --acc: #e0a63c; }
+.turno-card.hockey     { --acc: #5aa9e6; }
+.turno-card.basket     { --acc: #e87d3e; }
+.turno-card.funcional  { --acc: #e0605a; }
+.turno-card.gimnasio   { --acc: #9aa7b8; }
+.turno-card.grupal     { --acc: #d97bb0; }
+.turno-card.marcial    { --acc: #c9484f; }
+.turno-card.natacion   { --acc: #4cc3d9; }
+.turno-card.pilates    { --acc: #a58be0; }
+.turno-card.playa      { --acc: #e6c88a; }
+.turno-card.raqueta    { --acc: #a8cf4a; }
+.turno-card[class*="turno-card "]::before { height: 3px; background: linear-gradient(90deg, transparent, var(--acc, var(--gold)), transparent); opacity: .85; }
+.turno-card[class*="turno-card "]:hover { box-shadow: 0 22px 45px rgba(0,0,0,.35), 0 0 25px color-mix(in srgb, var(--acc, #d4af37) 22%, transparent); }
