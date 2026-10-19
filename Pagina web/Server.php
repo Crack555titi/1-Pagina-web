@@ -75,7 +75,7 @@ try {
             $_SESSION['usuario_nombre'] = $usuario['nombre'];
             $_SESSION['usuario_apellido'] = $usuario['apellido'];
             $_SESSION['usuario_email'] = $usuario['email'];
-            $_SESSION['usuario_avatar'] = $_SESSION['usuario_avatar'] ?? '';
+            $_SESSION['usuario_avatar'] = $usuario['avatar'] ?? '';
 
             $respuesta["exito"] = true;
             $respuesta["valido"] = true;
