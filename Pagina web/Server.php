@@ -57,7 +57,7 @@ try {
                 "nombre" => $nombre,
                 "apellido" => $apellido,
                 "email" => $email,
-                avatar" => $usuario['avatar'] ?? ''
+                "avatar" => $_SESSION['usuario_avatar']
             ];
         }
     }
@@ -66,7 +66,7 @@ try {
         $email = $input['email'] ?? '';
         $password = $input['password'] ?? '';
 
-        $stmt = $db->prepare("select* FROM usuarios WHERE email = :email");
+        $stmt = $db->prepare("SELECT * FROM usuarios WHERE email = :email");
         $stmt->execute([':email' => $email]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
