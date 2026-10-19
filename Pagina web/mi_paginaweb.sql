@@ -22,7 +22,7 @@ CREATE TABLE `usuarios` (
   `password` varchar(255) NOT NULL,
   `validacion` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+ALTER TABLE usuarios ADD COLUMN avatar MEDIUMTEXT NULL;
 --
 -- Volcado de datos para la tabla `usuarios`
 --
