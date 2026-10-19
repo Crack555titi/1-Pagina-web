@@ -101,6 +101,8 @@
         const grupos = Object.entries(CATS).map(([k, label]) => `<div><b style="color:var(--gold);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase">${label}</b>${
             DEPORTES.filter(d => d.cat === k).map(d => `<label><input type="checkbox" data-dep="${d.slug}" ${s.deportes.includes(d.slug) ? 'checked' : ''}> ${esc(d.nombre)} · ${esc(d.precio)}</label>`).join('')}</div>`).join('');
 
+        const planAprobado = pagado(`plan:${s.plan}:${s.alcance}`);
+
         cont.hidden = false;
         cont.innerHTML = `
         <div class="sec-head"><small>Hola, ${esc(user.nombre || 'socio')}</small><h2>Tu panel de socio</h2></div>
@@ -124,21 +126,91 @@
                     ${ordenados.length ? `<ul class="lista-dep">${ordenados.map(d => `<li><span>${d.emoji} ${esc(d.nombre)}<small>${esc(d.sedes)}</small></span><b>${esc(d.horarios)}</b></li>`).join('')}</ul>` : '<p>Cuando sumes deportes, vas a ver tus horarios acá.</p>'}
                 </div>
             </div>
+            ${planAprobado ? `
             <div class="carnet">
                 <div class="marca">AERUS CLUB</div>
                 <div class="nombre">${esc(nombre)}</div>
                 <div class="meta">Socio N° <b>${numero}</b><br>Plan <b>${p.nombre}</b> · ${s.alcance === 'una' ? 'Una sede' : 'Todas las sedes'}<br>${esc(user.email || '')}</div>
                 <div class="qr" id="qrBox"></div>
                 <p class="aviso-local">Presentá este código al ingresar a la sede.</p>
-            </div>
+            </div>` : `
+            <div class="caja carnet-bloqueado">
+                <h3>Carnet pendiente</h3>
+                <p>Lo habilitamos cuando verifiquemos tu pago de $${MONTO_PAGO}.</p>
+            </div>`}
         </div>
         <p class="aviso-local" style="text-align:center;margin-top:18px">Tus elecciones se guardan en este navegador.</p>`;
-        pintarQR($('qrBox'), `AERUS|${numero}|${p.id}|${s.alcance}`);
+        if (planAprobado) pintarQR($('qrBox'), `AERUS|${numero}|${p.id}|${s.alcance}`);
     }
 
     // ---------- Eventos
-    function elegirPlan(id) {
+    // ---------- Pagos (manual, $10 por compra)
+    const MONTO_PAGO = 10;
+    const QR_IMG = '../imagenes/qr-10.png';
+    let pagos = [];
+
+    async function llamarPagos(datos) {
+        try {
+            const r = await fetch('../PHP/pagos.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datos)
+            });
+            return await r.json();
+        } catch (e) {
+            return { exito: false, mensaje: 'No se pudo conectar con el servidor.' };
+        }
+    }
+
+    async function cargarPagos() {
+        const d = await llamarPagos({ accion: 'listar' });
+        pagos = d.exito ? d.pagos : [];
+    }
+
+    const pagado = concepto => pagos.some(p => p.concepto === concepto && p.estado === 'aprobado');
+
+    // Muestra el QR de $10 y registra el número de operación.
+    // Resuelve true si se registró el pago, false si se canceló.
+    function pedirPago(concepto) {
+        return new Promise(resolve => {
+            const modal = document.createElement('div');
+            modal.className = 'pago-modal';
+            modal.innerHTML = `
+                <div class="pago-caja">
+                    <h3>Pagá $${MONTO_PAGO} para continuar</h3>
+                    <img src="${QR_IMG}" alt="QR de pago" width="220">
+                    <p>Escaneá el QR con Mercado Pago y escribí el número de operación.</p>
+                    <input id="pagoRef" placeholder="Número de operación" maxlength="64">
+                    <div class="pago-acciones">
+                        <button type="button" id="pagoCancel" class="hero-btn secondary">Cancelar</button>
+                        <button type="button" id="pagoOk" class="hero-btn primary">Ya pagué</button>
+                    </div>
+                    <small id="pagoMsg"></small>
+                </div>`;
+            document.body.appendChild(modal);
+
+            const cerrar = valor => { modal.remove(); resolve(valor); };
+            const msg = t => { modal.querySelector('#pagoMsg').textContent = t; };
+
+            modal.querySelector('#pagoCancel').onclick = () => cerrar(false);
+            modal.querySelector('#pagoOk').onclick = async () => {
+                const ref = modal.querySelector('#pagoRef').value.trim();
+                if (!ref) { msg('Escribí el número de operación.'); return; }
+
+                const d = await llamarPagos({ accion: 'registrar', concepto, pago_ref: ref });
+                if (!d.exito) { msg(d.mensaje); return; }
+
+                await cargarPagos();
+                cerrar(true);
+            };
+        });
+    }
+
+    async function elegirPlan(id) {
         if (!user) { guardar('aerus_plan_pendiente', { plan: id, alcance }); location.href = 'LogIn.html'; return; }
+
+        if (!(await pedirPago(`plan:${id}:${alcance}`))) return;
+
         const s = socio() || { deportes: [] };
         guardar(keySocio(), { plan: id, alcance, deportes: s.deportes });
         renderPlanes(); renderPanel();
@@ -150,10 +222,17 @@
         document.querySelectorAll('.toggle button').forEach(x => x.classList.toggle('on', x === b));
         renderPlanes();
     }));
-    $('panelSocio').addEventListener('change', e => {
+    $('panelSocio').addEventListener('change', async e => {
         const c = e.target.closest('[data-dep]'); if (!c || !user) return;
         const s = socio(); if (!s) return;
-        s.deportes = c.checked ? [...new Set([...s.deportes, c.dataset.dep])] : s.deportes.filter(x => x !== c.dataset.dep);
+
+        if (c.checked) {
+            if (!(await pedirPago(`deporte:${c.dataset.dep}`))) { c.checked = false; return; }
+            s.deportes = [...new Set([...s.deportes, c.dataset.dep])];
+        } else {
+            s.deportes = s.deportes.filter(x => x !== c.dataset.dep);
+        }
+
         guardar(keySocio(), s); pickAbierto = true; renderPanel();
     });
 
@@ -161,18 +240,17 @@
 
     fetch('../PHP/comproba_session.php', { credentials: 'same-origin' })
         .then(r => r.json())
-        .then(data => {
+        .then(async data => {
             user = data.logueado ? data.usuario : null;
             const pend = user && leer('aerus_plan_pendiente');
             if (pend && plan(pend.plan)) {
                 alcance = pend.alcance === 'todas' ? 'todas' : 'una';
-                const s = socio() || { deportes: [] };
-                guardar(keySocio(), { plan: pend.plan, alcance, deportes: s.deportes });
             }
             try { localStorage.removeItem('aerus_plan_pendiente'); } catch (e) { /* nada */ }
             const s = socio();
             if (s) alcance = s.alcance;
             document.querySelectorAll('.toggle button').forEach(x => x.classList.toggle('on', x.dataset.alcance === alcance));
+            await cargarPagos();
             renderPlanes(); renderPanel();
         })
         .catch(() => { renderPanel(); /* sin servidor PHP: versión para visitantes */ });

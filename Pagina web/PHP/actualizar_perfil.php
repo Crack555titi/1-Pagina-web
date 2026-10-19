@@ -11,7 +11,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 $avatar = $input['avatar'] ?? null;
 
 if ($avatar) {
-    if (!str_starts_with($avatar, 'data:image/')) {
+    if (substr($avatar, 0, 11) !== 'data:image/') {
         echo json_encode(['exito' => false, 'mensaje' => 'Formato de imagen no válido.']);
         exit();
     }

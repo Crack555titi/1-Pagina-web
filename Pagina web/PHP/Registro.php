@@ -10,11 +10,15 @@ $datos = json_decode($json_recibido, true);
 $datos['accion'] = 'registrar';
 
 // RUTA COMPLETA Y CORREGIDA
+session_write_close();
+
 $ch = curl_init('http://localhost/1-Pagina-web/Pagina%20web/Server.php');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($datos));
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+// Usamos el mismo ID de sesión que tiene el navegador
+curl_setopt($ch, CURLOPT_COOKIE, session_name() . '=' . session_id());
 
 $response = curl_exec($ch);
 

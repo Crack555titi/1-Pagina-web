@@ -48,3 +48,20 @@ ALTER TABLE usuarios
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
+
+--
+-- Tabla de pagos (cada plan o deporte se paga por separado)
+--
+CREATE TABLE `pagos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` int(11) NOT NULL,
+  `concepto` varchar(100) NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
+  `pago_ref` varchar(64) NOT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'en_revision',
+  `creado` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pago_ref` (`pago_ref`),
+  KEY `usuario_id` (`usuario_id`),
+  CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

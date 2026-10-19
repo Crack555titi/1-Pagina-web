@@ -1,2 +1,9 @@
 main:has(> .payment-shell) { display:flex; align-items:center; justify-content:center; }
 .payment-shell { width:min(760px,100%); padding:50px; text-align:center; border:1px solid rgba(212,175,55,.25); border-radius:24px; background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015)); }
+
+.pago-modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
+.pago-caja { background: #fff; color: #111; padding: 24px; border-radius: 12px; max-width: 340px; width: 100%; text-align: center; }
+.pago-caja img { display: block; margin: 12px auto; max-width: 100%; }
+.pago-caja input { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; }
+.pago-acciones { display: flex; gap: 8px; justify-content: center; }
+.carnet-bloqueado { text-align: center; opacity: .8; }
