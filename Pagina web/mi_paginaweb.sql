@@ -35,7 +35,13 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `password`, `valida
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
-
+  
+ALTER TABLE usuarios
+  ADD COLUMN plan VARCHAR(20) NULL,
+  ADD COLUMN alcance VARCHAR(10) NULL,
+  ADD COLUMN deportes TEXT NULL,
+  ADD COLUMN pago_estado VARCHAR(20) NOT NULL DEFAULT 'pendiente',
+  ADD COLUMN pago_ref VARCHAR(64) NULL;
 --
 -- Incrementar tabla user
 --

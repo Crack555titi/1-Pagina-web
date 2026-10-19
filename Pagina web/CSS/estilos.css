@@ -385,7 +385,6 @@ nav { display: flex; justify-content: center; }
 .horarios-turnos {
     width: min(1180px, 100%);
     margin: 8px auto 0;
-    padding: center;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
     gap: 18px;
