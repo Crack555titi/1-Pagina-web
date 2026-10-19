@@ -86,7 +86,7 @@ try {
                 "nombre" => $usuario['nombre'],
                 "apellido" => $usuario['apellido'],
                 "email" => $usuario['email'],
-                "avatar" => $_SESSION['usuario_avatar']
+                "avatar" => $usuario['avatar'] ?? ''
             ];
         } else {
             $respuesta["mensaje"] = "Credenciales incorrectas";
