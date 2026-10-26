@@ -13,7 +13,8 @@ if (isset($_SESSION['usuario_id'])) {
         'nombre' => $_SESSION['usuario_nombre'] ?? '',
         'apellido' => $_SESSION['usuario_apellido'] ?? '',
         'email' => $_SESSION['usuario_email'] ?? '',
-        'avatar' => $_SESSION['usuario_avatar'] ?? ''
+        'avatar' => $_SESSION['usuario_avatar'] ?? '',
+        'rol' => $_SESSION['usuario_rol'] ?? 'socio'
     ];
 }
 

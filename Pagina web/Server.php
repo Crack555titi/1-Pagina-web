@@ -40,7 +40,7 @@ try {
                 ':nombre' => $nombre,
                 ':apellido' => $apellido,
                 ':email' => $email,
-                ':password' => $password
+                ':password' => password_hash($password, PASSWORD_DEFAULT)
             ]);
 
             $usuarioId = (int)$db->lastInsertId();
@@ -49,6 +49,7 @@ try {
             $_SESSION['usuario_apellido'] = $apellido;
             $_SESSION['usuario_email'] = $email;
             $_SESSION['usuario_avatar'] = $_SESSION['usuario_avatar'] ?? '';
+            $_SESSION['usuario_rol'] = 'socio';
 
             $respuesta["exito"] = true;
             $respuesta["mensaje"] = "¡Usuario registrado con éxito!";
@@ -70,12 +71,19 @@ try {
         $stmt->execute([':email' => $email]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($usuario && $password === $usuario['password']) {
+        if ($usuario && (password_verify($password, $usuario['password']) || hash_equals((string)$usuario['password'], (string)$password))) {
+            // Compatibilidad: convertir automáticamente contraseñas antiguas en texto plano a hash.
+            if (!password_get_info($usuario['password'])['algo']) {
+                $nuevoHash = password_hash($password, PASSWORD_DEFAULT);
+                $actualizar = $db->prepare('UPDATE usuarios SET password = :p WHERE id = :id');
+                $actualizar->execute([':p' => $nuevoHash, ':id' => $usuario['id']]);
+            }
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nombre'] = $usuario['nombre'];
             $_SESSION['usuario_apellido'] = $usuario['apellido'];
             $_SESSION['usuario_email'] = $usuario['email'];
             $_SESSION['usuario_avatar'] = $usuario['avatar'] ?? '';
+            $_SESSION['usuario_rol'] = $usuario['rol'] ?? 'socio';
 
             $respuesta["exito"] = true;
             $respuesta["valido"] = true;

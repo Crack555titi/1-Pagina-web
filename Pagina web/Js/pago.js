@@ -160,7 +160,7 @@
                 <div class="carnet-top"><span class="marca">AERUS CLUB</span><span class="sello">SOCIO ACTIVO</span></div>
                 <div class="plan-banda">${esc(pa.nombre)}</div>
                 <div class="nombre">${esc(nombre)}</div>
-                <div class="meta">Socio N° <b>${numero}</b><br>${esc(t.lema)}<br>Alcance: <b>${alcA}</b><br>${esc(user.email || '')}</div>
+                <div class="meta">Socio N° <b>${numero}</b><br>${esc(t.lema)}<br>Alcance: <b>${alcA}</b><br>${esc(user.email || '')}<br><span id="vigenciaCuota">Consultando vencimiento…</span></div>
                 <div class="qr" id="qrBox" data-qr="${t.qr}"></div>
                 <p class="aviso-local">Presentá este código al ingresar a la sede.</p>
             </div>`;
@@ -200,16 +200,16 @@
             </div>
             ${carnet}
         </div>
-        <p class="aviso-local" style="text-align:center;margin-top:18px">Tus elecciones se guardan en este navegador.</p>`;
-        if (apr) cargarCredencial();
+        <section class="caja historial-pagos"><h3>Historial de pagos</h3><div id="historialPagos">Cargando movimientos…</div></section><p class="aviso-local" style="text-align:center;margin-top:18px"><a href="perfil.html">Editar perfil</a> · <a href="../pages/comunidad.html">Dejar una opinión</a> · <a href="../pages/agenda.html">Reservar una clase</a></p>`;
+        cargarHistorial(); if (apr) cargarCredencial();
     }
 
     // El código del QR lo entrega el servidor y solo si el pago del plan está aprobado
     async function cargarCredencial() {
         const d = await llamarPagos({ accion: 'credencial' });
         const box = $('qrBox'); if (!box) return;
-        if (d.exito && d.codigo) pintarQR(box, d.codigo, box.dataset.qr);
-        else box.innerHTML = '<div class="qr-txt">No se pudo cargar la credencial. Recargá la página.</div>';
+        if (d.exito && d.codigo) { pintarQR(box, d.codigo, box.dataset.qr); try { const guardarOffline=()=>{const canvas=box.querySelector('canvas');const img=box.querySelector('img');let imagen='';try{imagen=canvas?canvas.toDataURL('image/png'):(img?img.src:'')}catch(_){}localStorage.setItem('aerus_credencial_offline', JSON.stringify({codigo:d.codigo,imagen,plan:d.plan,alcance:d.alcance,sede:d.sede||'',cuota_hasta:d.cuota_hasta||'',guardado:Date.now()}));};setTimeout(guardarOffline,350); } catch(_){} const vig=$('vigenciaCuota'); if(vig) vig.textContent='Al día hasta: '+(d.cuota_hasta||'—')+(d.sede?' · Sede: '+d.sede:''); }
+        else { let cache=null; try{cache=JSON.parse(localStorage.getItem('aerus_credencial_offline')||'null')}catch(_){} if(!navigator.onLine && cache && cache.codigo){if(cache.imagen){box.innerHTML='';const offlineImg=document.createElement('img');offlineImg.src=cache.imagen;offlineImg.alt='Código QR guardado para uso sin conexión';offlineImg.width=130;offlineImg.height=130;box.appendChild(offlineImg)}else pintarQR(box,cache.codigo,box.dataset.qr);const vig=$('vigenciaCuota');if(vig)vig.textContent='Copia sin conexión · vencimiento registrado: '+(cache.cuota_hasta||'no disponible')+(cache.sede?' · Sede: '+cache.sede:'');const aviso=document.createElement('p');aviso.className='aviso-local';aviso.textContent='Credencial guardada en este dispositivo. Sin conexión no se puede comprobar si hubo renovaciones o cambios de estado.';box.parentNode.appendChild(aviso)}else box.innerHTML = '<div class="qr-txt">No se pudo cargar la credencial. Conectate a internet y recargá la página.</div>'; }
     }
 
     // ---------- Eventos
@@ -229,6 +229,15 @@
         } catch (e) {
             return { exito: false, mensaje: 'No se pudo conectar con el servidor.' };
         }
+    }
+
+    async function cargarHistorial() {
+        const box = $('historialPagos'); if (!box) return;
+        try { const r = await fetch('../PHP/api_club.php?accion=mis_pagos', { credentials: 'same-origin' }); const d = await r.json();
+            if (!d.exito) { box.textContent = 'Iniciá sesión para consultar tus pagos.'; return; }
+            const socio=d.socio||{}; const vig=$('vigenciaCuota'); if(vig) vig.textContent='Al día hasta: '+(socio.cuota_hasta||'Sin vigencia activa')+(socio.sede?' · Sede: '+socio.sede:'');
+            box.innerHTML = d.pagos.length ? '<div class="tabla-wrap"><table class="tabla"><thead><tr><th>Fecha</th><th>Concepto</th><th>Estado</th><th>Monto</th></tr></thead><tbody>'+d.pagos.map(x=>`<tr><td>${esc(x.creado||'')}</td><td>${esc(nombreConcepto(x.concepto))}</td><td>${esc(ESTADOS[x.estado]?.[0]||x.estado)}</td><td>${money(Number(x.monto))}</td></tr>`).join('')+'</tbody></table></div>' : '<p>Todavía no hay pagos registrados.</p>';
+        } catch (_) { box.textContent='No se pudo cargar el historial.'; }
     }
 
     async function cargarPagos() {
@@ -285,9 +294,11 @@
 
             q('#pagoOk').onclick = async () => {
                 const ref = q('#pagoRef').value.trim();
+                let sede = '';
+                if (/^plan:[^:]+:una$/.test(concepto)) { sede = prompt('Elegí tu sede: Palomar, Villa Luzuriaga o Parque Patricio', 'Palomar') || ''; if (!['Palomar','Villa Luzuriaga','Parque Patricio'].includes(sede)) { msg('Elegí una de las sedes disponibles.'); return; } }
                 if (!ref) { msg('Escribí el número de operación.'); return; }
                 const ok = q('#pagoOk'); ok.disabled = true; ok.textContent = 'Enviando…'; msg('');
-                const d = await llamarPagos({ accion: 'registrar', concepto, pago_ref: ref });
+                const d = await llamarPagos({ accion: 'registrar', concepto, pago_ref: ref, sede });
                 if (!d.exito) { ok.disabled = false; ok.textContent = 'Ya pagué'; msg(d.mensaje); return; }
                 await cargarPagos();
                 enviado = true;
@@ -340,6 +351,7 @@
         .then(r => r.json())
         .then(async data => {
             user = data.logueado ? data.usuario : null;
+            if(user){try{localStorage.setItem('aerus_user_offline',JSON.stringify(user))}catch(_){}}
             const pend = user && leer('aerus_plan_pendiente');
             if (pend && plan(pend.plan)) {
                 alcance = pend.alcance === 'todas' ? 'todas' : 'una';
@@ -351,5 +363,9 @@
             document.querySelectorAll('.toggle button').forEach(x => x.classList.toggle('on', x.dataset.alcance === alcance));
             renderPlanes(); renderPanel();
         })
-        .catch(() => { renderPanel(); /* sin servidor PHP: versión para visitantes */ });
+        .catch(() => {
+            let offlineUser=null, cached=null; try{offlineUser=JSON.parse(localStorage.getItem('aerus_user_offline')||'null');cached=JSON.parse(localStorage.getItem('aerus_credencial_offline')||'null')}catch(_){}
+            if(offlineUser && cached && cached.codigo){user=offlineUser;const cont=$('panelSocio');cont.hidden=false;const nombre=[user.nombre,user.apellido].filter(Boolean).join(' ');cont.innerHTML=`<div class="sec-head"><small>Modo sin conexión</small><h2>Tu credencial guardada</h2></div><div class="carnet activo"><div class="carnet-top"><span class="marca">AERUS CLUB</span><span class="sello">COPIA LOCAL</span></div><div class="plan-banda">${esc(cached.plan||'Socio')}</div><div class="nombre">${esc(nombre||'Socio')}</div><div class="meta">Socio N° <b>AER-${String(user.id).padStart(5,'0')}</b><br>Alcance: ${esc(cached.alcance||'')}<br>${cached.sede?'Sede: '+esc(cached.sede)+'<br>':''}Al día hasta: ${esc(cached.cuota_hasta||'No disponible')}</div><div class="qr">${cached.imagen?`<img src="${cached.imagen}" width="130" height="130" alt="QR guardado sin conexión">`:`<div class="qr-txt">${esc(cached.codigo)}</div>`}</div><p class="aviso-local">Copia guardada en este dispositivo. Sin conexión no se puede comprobar si la cuota sigue vigente ni si hubo cambios posteriores.</p></div>`;return;}
+            renderPanel(); /* Sin sesión ni credencial guardada: vista pública. */
+        });
 })();

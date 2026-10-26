@@ -11,7 +11,7 @@
         <meta property="og:description" content="Escribinos para recibir información sobre actividades, horarios y sedes.">
         <title>Contacto | Aerus Club</title>
         <link rel="stylesheet" href="../CSS/estilos.css">
-        <script src="../Js/auth.js"></script>
+        <script src="../Js/auth.js" defer></script><script src="../Js/contacto.js" defer></script><link rel="stylesheet" href="../CSS/funciones.css">
     </head>
     <body>
         <header>
@@ -28,7 +28,7 @@
                 <ul class="items">
                         <li><a href="../index.html"> Inicio </a></li>
                         <li><a href="deportes.html"> Deportes </a></li>
-                        <li><a href="sedes.html"> Nuestras Sedes </a></li>
+                        <li><a href="sedes.html"> Nuestras Sedes </a></li><li><a href="agenda.html"> Agenda </a></li><li><a href="comunidad.html"> Opiniones </a></li>
                     </ul>
             </nav>
         </header>
@@ -37,9 +37,10 @@
                 <h2>Comunicate con nosotros</h2>
                 <p>Puedes escribirnos via email o visitarnos en nuestras sedes. Estamos listos para ayudarte a encontrar la mejor opción deportiva.</p>
             </section>
+            <section class="feature-main"><div class="feature-card"><h2>Escribinos</h2><p>Dejanos tu consulta y el equipo podrá responderte por correo.</p><form id="contactForm"><label>Nombre<input name="nombre" maxlength="120" required></label><label>Email<input name="email" type="email" maxlength="190" required></label><label>Asunto<input name="asunto" maxlength="150" value="Consulta desde la web" required></label><label>Mensaje<textarea name="mensaje" minlength="10" maxlength="3000" required></textarea></label><button class="btn" type="submit">Enviar mensaje</button><p id="contactEstado" class="notice" aria-live="polite"></p></form></div></section>
             <section class="red_social">
-               <a href="https://www.instagram.com/ti.ti5721/" target="_blank" rel="noopener"> <img src="../imagenes/insta.png" alt="Instagram de Aerus Club"></a>
-               <a href="https://wa.me/54911XXXXXXXX?text=Hola%20Aerus%20Club%2C%20quiero%20consultar%20por%20sus%20actividades" target="_blank" rel="noopener"> <img src="../imagenes/whatsapp.png" alt="WhatsApp de Aerus Club"></a>
+               <a href="https://www.instagram.com/ti.ti5721/" target="_blank" rel="noopener"> <img loading="lazy" src="../imagenes/insta.png" alt="Instagram de Aerus Club"></a>
+               <a href="https://wa.me/54911XXXXXXXX?text=Hola%20Aerus%20Club%2C%20quiero%20consultar%20por%20sus%20actividades" target="_blank" rel="noopener"> <img loading="lazy" src="../imagenes/whatsapp.png" alt="WhatsApp de Aerus Club"></a>
             </section>
         </main>
         <footer>

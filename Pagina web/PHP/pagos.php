@@ -25,9 +25,10 @@ try {
     if ($accion === 'registrar') {
         $concepto = $input['concepto'] ?? '';
         $ref = trim($input['pago_ref'] ?? '');
+        $sede = trim($input['sede'] ?? '');
 
         $conceptoValido = preg_match('/^(plan:(individual|familiar|estudiante|jubilado):(una|todas)|deporte:[a-z0-9-]+)$/', $concepto);
-        if (!$conceptoValido || $ref === '' || strlen($ref) > 64) {
+        if (!$conceptoValido || $ref === '' || strlen($ref) > 64 || (preg_match('/^plan:[^:]+:una$/', $concepto) && !in_array($sede, ['Palomar','Villa Luzuriaga','Parque Patricio'], true))) {
             echo json_encode(['exito' => false, 'mensaje' => 'Datos de pago no válidos.']);
             exit();
         }
@@ -40,30 +41,30 @@ try {
             exit();
         }
 
-        $stmt = $db->prepare("INSERT INTO pagos (usuario_id, concepto, monto, pago_ref, estado)
-                              VALUES (:u, :c, :m, :r, 'en_revision')");
-        $stmt->execute([':u' => $uid, ':c' => $concepto, ':m' => MONTO_PAGO, ':r' => $ref]);
+        $stmt = $db->prepare("INSERT INTO pagos (usuario_id, concepto, monto, pago_ref, estado, sede)
+                              VALUES (:u, :c, :m, :r, 'en_revision', :s)");
+        $stmt->execute([':u' => $uid, ':c' => $concepto, ':m' => MONTO_PAGO, ':r' => $ref, ':s' => ($sede !== '' ? $sede : null)]);
 
         echo json_encode(['exito' => true, 'mensaje' => 'Pago enviado a revisión.']);
 
     } elseif ($accion === 'listar') {
-        $stmt = $db->prepare("SELECT concepto, estado FROM pagos WHERE usuario_id = :u ORDER BY id ASC");
+        $stmt = $db->prepare("SELECT concepto, estado, monto, pago_ref, creado, revisado FROM pagos WHERE usuario_id = :u ORDER BY creado DESC");
         $stmt->execute([':u' => $uid]);
         echo json_encode(['exito' => true, 'pagos' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
 
     } elseif ($accion === 'credencial') {
         // El código del QR solo se entrega si el pago del plan ya fue aprobado
-        $stmt = $db->prepare("SELECT concepto FROM pagos WHERE usuario_id = :u AND estado = 'aprobado' AND concepto LIKE 'plan:%' ORDER BY id DESC LIMIT 1");
+        $stmt = $db->prepare("SELECT p.concepto,u.cuota_hasta,u.sede FROM pagos p JOIN usuarios u ON u.id=p.usuario_id WHERE p.usuario_id = :u AND p.estado = 'aprobado' AND p.concepto LIKE 'plan:%' ORDER BY p.id DESC LIMIT 1");
         $stmt->execute([':u' => $uid]);
         $fila = $stmt->fetch(PDO::FETCH_ASSOC);
-        if (!$fila) {
+        if (!$fila || empty($fila['cuota_hasta']) || $fila['cuota_hasta'] < date('Y-m-d')) {
             echo json_encode(['exito' => false, 'mensaje' => 'Credencial no habilitada.']);
             exit();
         }
         list(, $plan, $alcance) = explode(':', $fila['concepto']);
         $numero = 'AER-' . str_pad((string)$uid, 5, '0', STR_PAD_LEFT);
         $firma = substr(hash_hmac('sha256', $numero . '|' . $fila['concepto'], QR_SECRETO), 0, 16);
-        echo json_encode(['exito' => true, 'plan' => $plan, 'alcance' => $alcance, 'codigo' => "AERUS|$numero|$plan|$alcance|$firma"]);
+        echo json_encode(['exito' => true, 'plan' => $plan, 'alcance' => $alcance, 'sede' => $fila['sede'], 'cuota_hasta' => $fila['cuota_hasta'], 'codigo' => "AERUS|$numero|$plan|$alcance|$firma"]);
 
     } else {
         echo json_encode(['exito' => false, 'mensaje' => 'Acción no válida.']);

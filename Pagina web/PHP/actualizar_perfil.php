@@ -29,11 +29,17 @@ if ($avatar) {
 }
 
 if (isset($input['nombre']) && trim($input['nombre']) !== '') {
-    $_SESSION['usuario_nombre'] = trim($input['nombre']);
+    $nombre = trim($input['nombre']); $apellido = trim($input['apellido'] ?? '');
+    $db = $db ?? new PDO("mysql:host=localhost;dbname=mi_paginaweb;charset=utf8mb4", 'root', '');
+    $stmt = $db->prepare("UPDATE usuarios SET nombre=:n, apellido=:a WHERE id=:id");
+    $stmt->execute([':n'=>$nombre, ':a'=>$apellido, ':id'=>$_SESSION['usuario_id']]);
+    $_SESSION['usuario_nombre'] = $nombre; $_SESSION['usuario_apellido'] = $apellido;
 }
-
-if (isset($input['apellido']) && trim($input['apellido']) !== '') {
-    $_SESSION['usuario_apellido'] = trim($input['apellido']);
+if (!empty($input['password'])) {
+    if (strlen($input['password']) < 8) { echo json_encode(['exito'=>false,'mensaje'=>'La contraseña debe tener al menos 8 caracteres.']); exit(); }
+    $db = $db ?? new PDO("mysql:host=localhost;dbname=mi_paginaweb;charset=utf8mb4", 'root', '');
+    $stmt=$db->prepare('UPDATE usuarios SET password=:p WHERE id=:id');
+    $stmt->execute([':p'=>password_hash($input['password'], PASSWORD_DEFAULT), ':id'=>$_SESSION['usuario_id']]);
 }
 
 echo json_encode([
